@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原型链</title>
+</head>
+<body>
+<script>
+    // function Person(name,sex) {
+    //     this.name=name;
+    //     this.sex=sex;
+    //     this.eat=function () {
+    //         console.log('這是構造函數中的吃方法');
+    //     }
+    // }
+    // Person.prototype.sex='女';
+    // Person.prototype.eat=function () {
+    //     console.log('這是原型對象中的吃方法');
+    // };
+    //
+    // var per =new Person('花花','男');
+    // console.log(per.sex);//男
+    // console.log(per.sex);//男
+
+
+    // ================================
+    function Person(name,sex) {
+        this.name=name;
+        this.eat=function () {
+            console.log('這是構造函數中的吃方法');
+        }
+    }
+    Person.prototype.sex='女';
+    Person.prototype.eat=function () {
+        console.log('這是原型對象中的吃方法');
+    };
+
+    var per =new Person('花花','男');
+    console.log(per.sex);//女
+
+
+    // *********************總結*****************
+    // 实例对象与原型对象之间的关系称为原型链
+    // 实例对象使用的属性或者方法，先在实例对象中查找，找到了则直接使用，
+    // 找不到就去实例对象的__proto__指向的原型对象 prototype中找，找到了就用，找不到就报错
+
+
+    // 实例对象中方法如果没有，就去创建该实例对象的构造函数的原型对象中去找
+</script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>构造函数和实例对象和原型之间的关系</title>
+</head>
+<body>
+<script>
+    // 通过构造函数实例对象并初始化
+    var arr = new Array(10,22,15);
+    arr.join('|');
+    console.log(arr);//实例对象
+    // join的方法在实例对象的__proto__上
+    console.log(arr.__proto__ == Array.prototype);//true
+</script>
+<script>
+    // 原型的作用之一就是：共享数据，节省空间
+    // 构造函数
+    function Person(name,age) {
+        this.name=name;
+        this.age=age;
+    }
+    // 通过构造函数的原型增加一个方法
+    Person.prototype.eat =function () {
+        console.log('开始吃饭**********');
+    };
+
+    var per =new Person('黄岩',25);
+    console.dir(Person);
+    per.eat();
+    // 构造函数  实例对象  原型对象
+    // 1.构造函数可以实例化对象；
+    // 2.构造函数中有一个属性prototype，是构造函数的原型对象
+    // 3.构造函数的原型（prototype）对象中有一个constructor构造器，这个构造器指的就是自己所在的原型对象所在的构造函数
+    // 4.实例对象的原型（__proto__）指向的是该构造函数的原型
+    // 5.构造函数的原型对象（prototype）中的方法是可以被实例对象直接访问的
+    // 这里就是那张原型 关系图
+</script>
+<script>
+    // 原型的作用之一：数据共享
+
+    // 属性需要共享，方法也需要共享
+    // 不需要共享的数据写在构造函数中，需要共享的数据写在原型中
+
+    // 构造函数
+    function Student(name,age,sex) {
+        this.name=name;
+        this.age=age;
+        this.sex=sex;
+    }
+
+    //所有学生的身高都是188，体重都是55
+    // 所有学生每天都要写500行代码
+    // 所有学生每天都要吃一个鸡蛋
+
+    // 原型对象
+    // Student.prototype.height='188';
+    // Student.prototype.weight='55';
+    // Student.prototype.study=function () {
+    //     console.log('写代码');
+    // };
+    // Student.prototype.eat =function () {
+    //     console.log('吃鸡蛋');
+    // };
+    //
+    // // 实例化对象，并初始化
+    // var stu = new Student('卿琴',22,'女');
+    // console.dir(Student);//构造函数中并没有name、age、sex属性，它可以看做是一个空模板
+    // console.dir(stu);//有naem，age，sex，三个属性；在原型__proto__上才有height、wight、study()、eat()、
+
+    // 可以把上面的改成简单的原型写法
+    // 存在的问题就是：需要手动添加constructor构造器指向
+    Student.prototype ={
+        constructor:Student,
+        height:'180',
+        weight:'60',
+        study:function () {
+            console.log('学习');
+        },
+        eat:function () {
+            console.log('吃饭');
+        }
+    };
+
+    var stuent = new Student('黄沙',18,'男');
+    console.dir(Student);
+    console.dir(stuent);
+</script>
+</body>
+</html>
