@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>贪吃蛇案例</title>
+    <style>
+        .map {
+            width: 800px;
+            height: 600px;
+            background-color: bisque;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+<div class="map">
+
+</div>
+<script>
+    // 产生随机对象
+    (function (window) {
+        function Random() {
+
+        }
+
+        Random.prototype.getRandom = function (min, max) {
+            return Math.floor(Math.random() * (max - min) + max);
+        };
+        // 把局部对象暴露给window顶级对象，就成全局对象
+        window.Random = new Random();
+    })(window);
+    // 产生小方块对象
+    (function (window) {
+        // console.log(Random.getRandom(0,5));
+        //获取地图对象
+        // var map = document.getElementsByClassName('map');
+        var map = document.querySelector('.map');
+
+        // 食物的构造函数
+        function Food(width, height, color) {
+            this.width = width || 20;//默认的小方块宽
+            this.height = height || 20;//默认的小方块高度
+            this.x = 0;//横坐标
+            this.y = 0;//纵坐标
+            this.color = color;//小方块的背景颜色
+            this.element = document.createElement("div");//小方块的元素
+        }
+
+        // 初始化小方块元素显示的效果及位置
+        Food.prototype.init = function (map) {
+            //设置小方块样式
+            var div = this.element;
+            div.style.position = 'absolute';//脱离文档流
+            div.style.width = this.width + 'px';
+            div.style.height = this.height + 'px';
+            div.style.backgroundColor = this.color;
+            // 将小方块加到map中去
+            map.appendChild(div);
+            this.render(map);
+        };
+
+        // 产生随机位置
+        Food.prototype.render = function (map) {
+            // 随机产生的横纵坐标
+            //TODO:食物超出给定范围了。。。。
+            var x1 = Random.getRandom(0, map.offsetWidth / this.width) * this.width;
+            var y1 = Random.getRandom(0, map.offsetHeight / this.height) * this.height;
+            console.log(' map.offsetWidth'+ map.offsetWidth);
+            console.log(' this.width'+ this.width);
+            console.log(' x1'+ x1);
+            this.x = x1;
+            this.y = y1;
+            var div = this.element;
+            div.style.left = this.x + 'px';
+            div.style.top = this.y + 'px';
+        };
+
+        var fd = new Food(20, 20, 'red');
+        console.log(fd.x+'=========='+fd.y);
+        fd.init(map);
+    })(window);
+</script>
+</body>
+</html>

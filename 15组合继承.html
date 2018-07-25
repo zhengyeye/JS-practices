@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组合继承</title>
+</head>
+<body>
+<script>
+    // 组合继承：原型继承+构造函数继承
+    function Person(name, age, weight, sex) {
+        this.name = name;
+        this.age = age;
+        this.weight = weight;
+        this.sex = sex;
+    }
+
+    Person.prototype.sayHi = function () {
+        console.log('你好！');
+    };
+
+    function Student(name, age, weight, sex, score) {
+        // 借用构造函数
+        Person.call(this, name, age, weight, sex);
+        this.score = score;
+    }
+
+    // 改变原型指向
+    Student.prototype = new Person();
+    Student.prototype.eat = function () {
+        console.log('吃东西');
+    };
+
+    var std1 = new Student('小花', 18, '45kg', '女', '80');
+    console.log(std1.name, std1.age, std1.weight, std1.sex, std1.score);//小花 18 45kg 女 80
+    std1.sayHi();//你好！
+    std1.eat();//吃东西
+
+    var std2 = new Student('小红', 22, '55kg', '男', '90');
+    console.log(std2.name, std2.age, std2.weight, std2.sex, std2.score);//小红 22 55kg 男 90
+    std2.sayHi();//你好！
+    std2.eat();//吃东西
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原型实现继承</title>
+</head>
+<body>
+<script>
+    //动物：姓名、体重、吃
+    //狗：姓名、体重、吃、毛色、哄主人开心的行为
+    //哈士奇：姓名、体重、吃、毛色、性别、哄主人开心的行为、玩的行为
+
+    function Animal(name, weight) {
+        this.name = name;
+        this.weight = weight;
+    }
+
+    // 动物的原型方法
+    Animal.prototype.eat = function () {
+        console.log('我是动物，吃吃吃');
+    };
+
+    // 狗的构造函数
+    function Dog(color) {
+        this.color = color;
+    }
+
+    Dog.prototype = new Animal('哮天犬', 50);
+    Dog.prototype.amuseHost = function () {
+        console.log('哄主人开心');
+    };
+
+    // 哈士奇
+    function Huskie(sex) {
+        this.sex = sex;
+    }
+
+    Huskie.prototype = new Dog('black');
+    Huskie.prototype.play = function () {
+        console.log('玩玩玩，大家一起玩');
+    };
+    // 实例化对象
+    var mydog = new Huskie('雄性');
+    console.log(mydog.name, mydog.weight, mydog.color, mydog.sex);
+    mydog.eat();
+    mydog.amuseHost();
+    mydog.play();
+
+    // 只要继承，就要改变原型的指向
+</script>
+</body>
+</html>

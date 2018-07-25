@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>改变原型指向</title>
+</head>
+<body>
+<script>
+    //人的构造函数
+    function Person(age) {
+        this.age = age;
+    }
+    //人的原型中添加方法
+    Person.prototype.eat = function () {
+        console.log('人在吃东西');
+    };
+    //学生的构造函数
+    function Student(sex) {
+        this.sex = sex;
+    }
+    //学生构造函数中添加方法---先在原型中添加方法
+    Student.prototype.study = function () {
+        console.log('学生在学习');
+    };
+
+    //改变原型对象的指向
+    Student.prototype = new Person(12);
+    var std=new Student('女');
+    console.log(std.eat);//是一个函数
+    console.log(std.study);//undefined  为什么不报错呢？
+    // 因为JS是一门动态类型的语言，对象没有什么，只要点了，那么这个对象就有了这个东西,
+    //没有这个属性，只要这个对象.属性名字，对象就有这个属性了，但是，该属性没有赋值，
+    //因此结果就是undefined
+</script>
+</body>
+</html>

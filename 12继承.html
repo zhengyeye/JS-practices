@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>继承</title>
+</head>
+<body>
+<script>
+    //人：姓名、年龄、性别、吃饭、睡觉、生活
+    //学生：姓名、年龄、性别、吃饭、睡觉、生活、成绩、学习
+    function Person(name,age,sex) {
+        this.name=name;
+        this.age=age;
+        this.sex=sex;
+    }
+    Person.prototype.eat=function () {
+        console.log('开开心心在吃饭。');
+    };
+    Person.prototype.sleep=function () {
+        console.log('安安心心在睡觉。');
+    };
+    Person.prototype.live=function () {
+        console.log('平平安安在生活。');
+    };
+
+    function Student(name,age,sex,score) {
+        this.name=name;
+        this.age=age;
+        this.sex=sex;
+        this.score =score;
+    }
+    Student.prototype.eat=function () {
+        console.log('开开心心在吃饭。');
+    };
+    Student.prototype.sleep=function () {
+        console.log('安安心心在睡觉。');
+    };
+    Student.prototype.live=function () {
+        console.log('平平安安在生活。');
+    };
+    Student.prototype.study=function () {
+        console.log('轻轻松松在学习。');
+    };
+    var std0 = new Student('小天',22,'女',99);
+    console.log(std0);
+    //以上代码中：相同的代码很多，造成代码冗余，不适合正常编码风格，于是改写：
+    // function Person(name,age,sex) {
+    //     this.name=name;
+    //     this.age=age;
+    //     this.sex=sex;
+    // }
+    // Person.prototype.eat=function () {
+    //     console.log('开开心心在吃饭。');
+    // };
+    // Person.prototype.sleep=function () {
+    //     console.log('安安心心在睡觉。');
+    // };
+    // Person.prototype.live=function () {
+    //     console.log('平平安安在生活。');
+    // };
+    //
+    // function Student(score) {
+    //     this.score =score;
+    // }
+    //
+    // Student.prototype=new Person('小明',20,'男');
+    // Student.prototype.study=function () {
+    //     console.log('轻轻松松在学习。');
+    // };
+    // var std = new Student(100);
+    // console.log(std);
+
+    // 这样改变Student的原型指向，使得学生与人发生关系，减少了重复代码
+</script>
+</body>
+</html>

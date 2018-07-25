@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>借用构造函数实现继承</title>
+</head>
+<body>
+<script>
+    // function Person(name,age,weight,sex){
+    //     this.name=name;
+    //     this.age=age;
+    //     this.weight=weight;
+    //     this.sex=sex;
+    // }
+    // Person.prototype.sayHi=function () {
+    //     console.log('你好！');
+    // };
+    //
+    // function Student(score) {
+    //     this.score=score;
+    // }
+    //
+    // // 希望人的类别中的属性可以共享给学生----继承
+    // Student.prototype=new Person('小明',10,'50kg','男');
+    // var std1=new Student('80');//小明 10 50kg 男 80
+    // console.log(std1.name,std1.age,std1.weight,std1.sex,std1.score);
+    // var std2=new Student('85');//小明 10 50kg 男 85
+    // console.log(std2.name,std2.age,std2.weight,std2.sex,std2.score);
+    // var std3=new Student('89');//小明 10 50kg 男 89
+    // console.log(std3.name,std3.age,std3.weight,std3.sex,std3.score);
+
+    // 为了数据共享，改变原型指向，做到了继承-------通过改变原型指向实现继承
+    // 缺陷:因为改变原型指向的同时实现继承,直接初始化了属性,继承过来的属性值都是一样的
+    // 只能通过重新调用对象的属性进行重新赋值;解决方法:
+    // 继承的时候，不用改变原型的指向，直接调用父级的构造函数的方式来为为属性赋值就可以了---
+    // 借用构造函数：把要继承的父级的构造函数拿过来，使用一下就可以了
+    // 构造函数名字.call(当前对象,属性1,属性2,属性3...)
+    // 解决了属性继承，并且值不重复的问题
+    // 缺陷：父级类别中的方法不能继承
+    function Person(name, age, weight, sex) {
+        this.name = name;
+        this.age = age;
+        this.weight = weight;
+        this.sex = sex;
+    }
+
+    Person.prototype.sayHi = function () {
+        console.log('你好！');
+    };
+
+    function Student(name, age, weight, sex, score) {
+        // 借用构造函数
+        Person.call(this, name, age, weight, sex);
+        this.score = score;
+    }
+
+    // 希望人的类别中的属性可以共享给学生----继承
+    var std1 = new Student('小花', 18, '45kg', '女', '80');
+    console.log(std1.name, std1.age, std1.weight, std1.sex, std1.score);//小花 18 45kg 女 80
+    std1.sayHi();//Uncaught TypeError: std1.sayHi is not a function
+    var std2 = new Student('小飞', 19, '50kg', '男', '85');
+    console.log(std2.name, std2.age, std2.weight, std2.sex, std2.score);//小飞 19 50kg 男 85
+    std2.sayHi();//Uncaught TypeError: std2.sayHi is not a function
+    var std3 = new Student('小强', 20, '55kg', '女', '88');
+    console.log(std3.name, std3.age, std3.weight, std3.sex, std3.score);//小强 20 55kg 女 88
+    std3.sayHi();//Uncaught TypeError: std3.sayHi is not a function
+</script>
+</body>
+</html>

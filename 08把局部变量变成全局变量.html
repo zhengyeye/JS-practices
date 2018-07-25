@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>把局部变量变成全局变量</title>
+</head>
+<body>
+<script>
+    (function (win) {//win 形参
+        var num = 10;//局部变量
+        win.num = num;
+    })(window);//window 实参
+    console.log(num);
+    //把局部变量变成全局变量
+    //只要把局部变量给全局变量window即可
+</script>
+</body>
+</html>
