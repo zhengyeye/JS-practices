@@ -1,7 +1,7 @@
 # JS-practices
 ### Day1.创建对象的四种方式：
 原型关系图
-![原型关系图](https://github.com/zhengyeye/JS-practices/blob/master/%E5%AF%B9%E8%B1%A1.png)
+![原型关系图](https://github.com/zhengyeye/JS-practices/blob/master/images/%E5%AF%B9%E8%B1%A1.png)
 
 解释：创建Person构造函数后，其默认拥有prototype属性，指向的是Person的原型；
 而Person的原型默认拥有constructor属性，该属性指向Person的构造函数
@@ -26,13 +26,13 @@ prototype是对象
 ***
 ### Day13.原型实现继承
 原型实现继承关系图
-![原型实现继承](https://github.com/zhengyeye/JS-practices/blob/master/13%E5%8E%9F%E5%9E%8B%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF.png)
+![原型实现继承](https://github.com/zhengyeye/JS-practices/blob/master/images/13%E5%8E%9F%E5%9E%8B%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF.png)
 这张图被自己画的比较凌乱，后续再整理一下。
 ***
 ### Day16.拷贝继承
 拷贝继承关系图
-![拷贝继承](https://github.com/zhengyeye/JS-practices/blob/master/16%E6%8B%B7%E8%B4%9D%E7%BB%A7%E6%89%BF.png)
+![拷贝继承](https://github.com/zhengyeye/JS-practices/blob/master/images/16%E6%8B%B7%E8%B4%9D%E7%BB%A7%E6%89%BF.png)
 ***
 ### Day17.逆推继承看原型
 逆推继承看原型关系图
-![逆推继承看原型](https://github.com/zhengyeye/JS-practices/blob/master/17%E9%80%86%E6%8E%A8%E7%BB%A7%E6%89%BF%E7%9C%8B%E5%8E%9F%E5%9E%8B.png)
+![逆推继承看原型](https://github.com/zhengyeye/JS-practices/blob/master/images/17%E9%80%86%E6%8E%A8%E7%BB%A7%E6%89%BF%E7%9C%8B%E5%8E%9F%E5%9E%8B.png)
