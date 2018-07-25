@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数也是对象</title>
+</head>
+<body>
+<p>对象中有__proto__属性</p>
+<p>函数中有prototype属性</p>
+<script>
+    // 函数是对象，但是对象不一定是函数
+    function F1() {
+
+    }
+    console.dir(F1);//既有prototype属性，又有__proto__属性
+    // 所有的函数实际上都是Function的构造函数创建出来的实例对象
+    console.log(F1.__proto__ == Function.prototype);
+    console.dir( Function.prototype);
+
+    var obj1={
+
+    };
+    console.dir(obj1);//只有__proto__属性，没有prototype属性
+
+    // 总结:如果一个东西里面既有__proto__,又有prototype，说明是对象，也是函数
+</script>
+</body>
+</html>

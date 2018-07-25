@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>bind方法</title>
+</head>
+<body>
+<script>
+    // bind是用来复制一份
+    // 使用的语法：
+    // 函数名字.bind(对象,参数1,参数2,参数3,...);------------------>返回值为复制之后的这个函数
+    // 方法名字.bind(对象,参数1,参数2,参数3,...);------------------>返回值为复制之后的这个方法
+    function Person(age) {
+        this.age = age;
+    }
+
+    Person.prototype.eat = function () {
+        console.log(this + '==============>' + this.age);
+    };
+
+    function Student(age) {
+        this.age = age;
+    }
+
+    var per = new Person(16);
+    var std = new Student(22);
+
+    var ff = per.eat.bind();
+    ff();//[object Window]==============>undefined
+
+    var ff1 = per.eat.bind(std);
+    ff1();//[object Object]==============>22
+</script>
+</body>
+</html>

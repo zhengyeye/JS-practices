@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>call和apply区别</title>
+</head>
+<body>
+<p>call和apply都可以改变this指向，只是参数传递的方法不一样</p>
+<P>
+    call的使用：
+    函数名字.call(对象,参数1,参数2,参数3,...);
+    方法名字.call(对象,参数1,参数2,参数3,...);
+
+    apply的使用：
+    函数名字.apply(对象,[参数1,参数2,参数3,...]);
+    方法名字.apply(对象,[参数1,参数2,参数3,...]);
+
+    只要是想使用别的对象的方法，并且希望这个方法是当前对象的，那么就使用call或者apply的方法来改变this指向
+
+<script>
+    function F1(x, y) {
+        console.log('这是F1中的x+y：' + (x + y) + this);
+    }
+
+    F1(1, 2);//这是F1中的x+y：3[object Window]
+
+    // 使用call:第一个参数为thisObj，后面依次为以逗号隔开的参数
+    F1.call(null, 1, 2);//这是F1中的x+y：3[object Window]
+    F1.call();//这是F1中的x+y：NaN[object Window]
+
+    // 使用apply: 第一个参数为thisObj,第二个参数为数组
+    F1.apply(null, [1, 2]);//这是F1中的x+y：3[object Window]
+    F1.apply();//这是F1中的x+y：NaN[object Window]
+    // call或者apply方法：传null或者不传，this指向均默认指window
+
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // 通过原型添加方法
+    Person.prototype.eat = function (x, y) {
+        console.log('这是通过原型添加的吃的方法:', this.age);
+    };
+    var per = new Person('小兰', 20);
+    per.eat();//这是通过原型添加的吃的方法: 20
+    function Student(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    var std = new Student('小明', 6);
+    per.eat.call(std, 2, 5);//这是通过原型添加的吃的方法: 6
+</script>
+</body>
+</html>

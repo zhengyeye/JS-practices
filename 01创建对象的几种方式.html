@@ -6,9 +6,9 @@
 </head>
 <body>
 <!--对象字面量-->
-<!--通过Object构造函数创建对象-->
+<!--通过Object构造函数创建对象（也即调用系统的构造函数）-->
 <!--工厂模式-->
-<!--构造函数模式-->
+<!--自定义构造函数模式-->
 <!--原型模式-->
 <!--组合使用构造函数模式与原型模式-->
 
@@ -23,7 +23,7 @@
     };
     person.eat();//*********************person 刘红
 
-    // 2.通过Object构造函数创建对象
+    // 2.通过Object构造函数创建对象（也即调用系统的构造函数）
     var person1 = new Object();
     person1.name = '韩义';
     person1.age = 19;
@@ -50,7 +50,7 @@
     // console.log(person2 instanceof Object);//true
     // 工厂模式识别不出数据类型具体是什么，所有的实例对象都为Object类型；于是构造函数模式就应用而生
 
-    // 构造函数模式
+    // 自定义构造函数模式
     function Person(name, age, sex) {
         this.name = name;
         this.age = age;

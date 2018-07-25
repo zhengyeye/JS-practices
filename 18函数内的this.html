@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数中的this</title>
+</head>
+<body>
+<script>
+    // 普通函数调用
+    // "use strict";
+    // function F1() {
+    //     console.log(this);//非严格模式下，this---->window；严格模式下，this---->undefined;
+    // }
+    // F1();
+
+    // 定时器方法中的this
+    // setInterval(function () {
+    //     console.log(this);//非严格模式下，this---->window；严格模式下，this---->undefined;
+    // },10000);
+
+    // 构造函数中的this---->一般都是创建实例对象使用的
+    function Person() {
+        console.log(this);//非严格模式下，this---->实例对象；严格模式下，this---->undefined;
+        //对象的方法
+        this.sayHi = function () {
+            console.log(this);
+        }
+    }
+
+    Person.prototype.eat = function () {
+        console.log(this);
+    };
+    // 原型对象中的this是实例对象
+    var per = new Person();
+    console.log(per);
+</script>
+</body>
+</html>
