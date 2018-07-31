@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS中的深浅拷贝</title>
+</head>
+<body>
+<script>
+    // JS中是深浅拷贝：
+    // 对于基本数据类型的拷贝，并没有深浅拷贝之说，我们所说的深浅拷贝都是针对引用数据类型而言的
+    // 1.浅拷贝：如果我们复制对象的所有属性都不是引用类型时，就可以使用浅拷贝，实现方式是遍历并复制，最终返回新的对象
+    // function shallowCopy(obj) {//obj:需要被复制的对象
+    //     var objCopy = {};//需要复制后的对象
+    //     // 只复制可遍历的属性
+    //     for (var key in obj) {
+    //         //只复制本身拥有的属性
+    //         if (obj.hasOwnProperty(key)) {
+    //             objCopy[key] = obj[key];
+    //         }
+    //     }
+    //     return objCopy;
+    // }
+    //
+    // var obj1 = {
+    //     name: 'mary',
+    //     age: 18,
+    //     course: {
+    //         math: 88,
+    //         chemistry: 99
+    //     }
+    // };
+    // var obj2 = shallowCopy(obj1);
+    //
+    // // 浅拷贝指向同一地址，修改其中一个引用数据类型的值，另外一个也会受影响，而值类型的数据则不存在该问题
+    // obj1.course.math = 100;
+    // console.log(obj1);
+    // console.log(obj2);
+    // 2.深拷贝：
+    // 深拷贝出的对象和原对象是完全分开的内存地址，也就不存在修改一个影响另一个的问题。
+    var objCopy = {};
+    //通过深拷贝，将a对象中的所有数据深拷贝到b对象中（需要使用到递归）
+    function deepCopy(a, b) {
+        for (var key in a) {
+            if (a[key] instanceof Array) {//数组
+                b[key] = [];
+                deepCopy(a[key], b[key]);
+            } else if (a[key] instanceof Object) {//对象
+                b[key] = {};
+                deepCopy(a[key], b[key]);
+            } else {
+                b[key] = a[key];
+            }
+        }
+    }
+
+    var obj1 = {
+        name: 'mary',
+        age: 18,
+        course: {
+            math: 88,
+            chemistry: 99
+        }
+    };
+    deepCopy(obj1, objCopy);
+    obj1.course.math = 100;
+    console.log(obj1);
+    console.log(objCopy);
+</script>
+</body>
+</html>
