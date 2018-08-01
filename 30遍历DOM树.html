@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数遍历DOM 树---递归方法</title>
+</head>
+<body>
+<div>
+    <p>这是一篇优秀的文章</p>
+    <ul>
+        <li>第一条</li>
+        <li>第二条</li>
+        <li>第三条</li>
+    </ul>
+</div>
+<script>
+    //获取页面中的根节点----跟标签
+    var root =document.documentElement;//html
+    //显示的是根节点
+    function forDom(root) {
+        //调用rootName，显示的是节点的名字
+        rootName(root);
+        //获取根节点中所有子节点
+        var children=root.children;
+        //调用遍历所有子节点的函数
+        forChildren(children);
+    }
+    function forChildren(children) {//找出子节点下的所有子节点
+        for(var i=0;i<children.length;i++){//遍历所有的子节点
+            //每个子节点
+            var child = children[i];
+            //显示每个子节点的名称
+            rootName(children[i]);
+            //判断child下面有没有子节点，若果还有子节点，那么就继续遍历
+            child.children&&forDom(child);
+        }
+    }
+    forDom(root);
+
+    function rootName(root) {//获取元素节点名称
+        console.log('我是元素节点名称*******************：'+root.nodeName);
+    }
+</script>
+</body>
+</html>
