@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>案例验证密码的弱中强</title>
+    <style>
+        #dv {
+            width: 300px;
+            height: 200px;
+            position: absolute;
+            left: 300px;
+            top: 100px;
+        }
+
+        .strenthLv0 {
+            height: 6px;
+            width: 120px;
+            border: 1px solid #ccc;
+            padding: 2px;
+        }
+
+        .strenthLv1 {
+            background: red;
+            height: 6px;
+            width: 40px;
+            border: 1px solid #ccc;
+            padding: 2px;
+        }
+
+        .strenthLv2 {
+            background: orange;
+            height: 6px;
+            width: 80px;
+            border: 1px solid #ccc;
+            padding: 2px;
+        }
+
+        .strenthLv3 {
+            background: green;
+            height: 6px;
+            width: 120px;
+            border: 1px solid #ccc;
+            padding: 2px;
+        }
+    </style>
+</head>
+<body>
+<div id="dv">
+    <label for="pwd">请输入密码</label>
+    <input type="text" value="" id="pwd" maxlength="16" minlength="6">
+    <div>
+        <span>密码强度：</span>
+        <div id="strenthLevel" class="strenthLv0"></div>
+    </div>
+</div>
+<script>
+    /**
+     * 密码最少为6位
+     * 低：只有数字----1级；只含数字、只含字母、只含特殊字符
+     * 中：两两组合----2级；包含数字和字母、数字和特殊字符、字母和特殊字符
+     * 高：三者都有----3级；包含数字和字母以及特殊字符
+     */
+    //通过id获取元素
+    function my$(id) {
+        return document.getElementById(id);
+    }
+
+    //获取文本框键盘抬起事件
+    my$("pwd").onkeyup = function () {
+        //键盘抬起的时候获取文本框的内容，验证密码强度
+        my$("strenthLevel").className = "strenthLv" + (this.value.length > 6 ? getLv(this.value) : 0);
+    };
+
+    //密码强度验证
+    function getLv(pwd) {
+        var lev = 0;
+        if (/[0-9]/.test(pwd)) {
+            lev++;
+        }
+        if (/[a-zA-Z]/.test(pwd)) {
+            lev++;
+        }
+        //判断有没有特殊字符
+        if (/[^0-9a-zA-Z_]/.test(pwd)) {
+            lev++;
+        }
+        return lev;
+    }
+
+</script>
+</body>
+</html>
